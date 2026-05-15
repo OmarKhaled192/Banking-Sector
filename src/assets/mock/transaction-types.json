@@ -1,4 +1,10 @@
 [
-  { "id": "debit", "label": "Debit", "icon": "pi-arrow-up-right", "severity": "danger" },
-  { "id": "credit", "label": "Credit", "icon": "pi-arrow-down-left", "severity": "success" }
+  {
+    "code": "Debit",
+    "label": "Debit"
+  },
+  {
+    "code": "Credit",
+    "label": "Credit"
+  }
 ]

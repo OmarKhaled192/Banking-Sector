@@ -1,14 +1,12 @@
 [
-  { "id": "groceries",      "label": "Groceries",       "icon": "pi-shopping-cart", "color": "#22c55e" },
-  { "id": "dining",         "label": "Dining",          "icon": "pi-star",          "color": "#f97316" },
-  { "id": "utilities",      "label": "Utilities",       "icon": "pi-bolt",          "color": "#3b82f6" },
-  { "id": "transportation", "label": "Transportation",  "icon": "pi-car",           "color": "#8b5cf6" },
-  { "id": "shopping",       "label": "Shopping",        "icon": "pi-tag",           "color": "#ec4899" },
-  { "id": "entertainment",  "label": "Entertainment",   "icon": "pi-video",         "color": "#06b6d4" },
-  { "id": "health",         "label": "Health",          "icon": "pi-heart",         "color": "#ef4444" },
-  { "id": "education",      "label": "Education",       "icon": "pi-book",          "color": "#10b981" },
-  { "id": "housing",        "label": "Housing",         "icon": "pi-home",          "color": "#f59e0b" },
-  { "id": "salary",         "label": "Salary",          "icon": "pi-briefcase",     "color": "#6366f1" },
-  { "id": "transfer",       "label": "Transfer",        "icon": "pi-arrow-right-arrow-left", "color": "#64748b" },
-  { "id": "other",          "label": "Other",           "icon": "pi-ellipsis-h",    "color": "#94a3b8" }
+  "Groceries",
+  "Bills",
+  "Shopping",
+  "Transfer",
+  "Income",
+  "Fees",
+  "Entertainment",
+  "Healthcare",
+  "Education",
+  "Travel"
 ]
