@@ -1,0 +1,4 @@
+[
+  { "id": "debit", "label": "Debit", "icon": "pi-arrow-up-right", "severity": "danger" },
+  { "id": "credit", "label": "Credit", "icon": "pi-arrow-down-left", "severity": "success" }
+]
