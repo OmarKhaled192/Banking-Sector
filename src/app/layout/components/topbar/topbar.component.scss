@@ -1,0 +1,48 @@
+.bp-topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 1rem;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .5rem;
+  border-radius: 8px;
+  color: #475569;
+}
+
+.menu-btn:hover {
+  background: #f1f5f9;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.end {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.username {
+  color: #64748b;
+  font-size: .875rem;
+}
+
+.avatar {
+  background: var(--p-primary-color);
+  color: #fff;
+}

@@ -1,0 +1,51 @@
+<div class="flex align-items-center justify-content-center min-h-screen bg-blue-50">
+  <p-card styleClass="w-full sm:w-30rem p-4 shadow-4 border-round-xl">
+    <div class="text-center mb-5">
+      <i class="pi pi-building text-primary text-5xl mb-3"></i>
+      <h2 class="text-2xl font-bold m-0 text-900">Banking Portal</h2>
+      <p class="text-600 mt-2">Secure Customer Access Management</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4">
+      @if (errorMessage) {
+        <p-message severity="error" [text]="errorMessage" styleClass="w-full"></p-message>
+      }
+
+      <div class="flex flex-column gap-2">
+        <label for="email" class="font-medium text-900">Email Address</label>
+        <input id="email" type="email" pInputText formControlName="email" placeholder="admin@bankportal.com" class="w-full p-3" />
+        
+        @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+          <small class="p-error block">
+            @if (loginForm.get('email')?.errors?.['required']) {
+              <span>Email is required.</span>
+            } @else if (loginForm.get('email')?.errors?.['email']) {
+              <span>Enter a valid email.</span>
+            }
+          </small>
+        }
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <label for="password" class="font-medium text-900">Password</label>
+        <p-password id="password" formControlName="password" [toggleMask]="true" placeholder="Enter your password" styleClass="w-full" inputStyleClass="w-full p-3" [feedback]="false"></p-password>
+        
+        @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+          <small class="p-error block">
+            @if (loginForm.get('password')?.errors?.['required']) {
+              <span>Password is required.</span>
+            } @else if (loginForm.get('password')?.errors?.['minlength']) {
+              <span>Minimum 6 characters.</span>
+            }
+          </small>
+        }
+      </div>
+
+      <p-button type="submit" [label]="loading ? 'Signing In...' : 'Sign In'" [loading]="loading" styleClass="w-full p-3 mt-3" [disabled]="loginForm.invalid || loading"></p-button>
+
+      <div class="text-center text-500 text-sm mt-3 border-top-1 border-300 pt-3">
+        <i class="pi pi-info-circle mr-1"></i> Use admin@bankportal.com / Admin@1234
+      </div>
+    </form>
+  </p-card>
+</div>

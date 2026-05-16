@@ -1,0 +1,17 @@
+<bp-loading-spinner />
+
+<bp-topbar
+  (menuToggle)="sidebarOpen.set(!sidebarOpen())"
+/>
+
+<div class="shell">
+
+  <bp-sidebar
+    [open]="sidebarOpen()"
+  />
+
+  <main class="content">
+    <router-outlet />
+  </main>
+
+</div>

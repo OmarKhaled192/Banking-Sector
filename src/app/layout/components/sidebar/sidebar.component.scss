@@ -1,0 +1,39 @@
+.sidebar {
+  width: 220px;
+  min-height: calc(100vh - 60px);
+  background: #0f172a;
+  transition: width .25s ease;
+  padding: 1rem 0;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding: 0 .5rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1rem;
+  border-radius: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: .9rem;
+}
+
+.nav-item:hover {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.nav-item.active {
+  background: #1d4ed8;
+  color: #fff;
+}

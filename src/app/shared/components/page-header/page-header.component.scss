@@ -1,0 +1,27 @@
+.bp-page-header {
+  border-left: 4px solid var(--p-primary-color);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: var(--p-primary-color);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: #6b7280;
+}

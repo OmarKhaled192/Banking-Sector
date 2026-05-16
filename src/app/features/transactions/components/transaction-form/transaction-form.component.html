@@ -1,0 +1,71 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
+  @if (errorMessage) {
+    <p-message severity="error" [text]="errorMessage" styleClass="w-full"></p-message>
+  }
+
+  <div class="flex flex-column gap-2">
+    <label for="type" class="font-medium">Transaction Type <span class="text-pink-600">*</span></label>
+    <p-select id="type" formControlName="type" [options]="(types$ | async) || []" optionLabel="label" optionValue="value" placeholder="Select Type" styleClass="w-full"></p-select>
+    
+    @if (form.get('type')?.touched && form.get('type')?.invalid) {
+      <small class="p-error">Transaction type is required.</small>
+    }
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="amount" class="font-medium">Amount (EGP) <span class="text-pink-600">*</span></label>
+    <p-inputNumber id="amount" formControlName="amount" [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.00" styleClass="w-full" inputStyleClass="w-full"></p-inputNumber>
+    
+    @if (form.get('amount')?.touched && form.get('amount')?.invalid) {
+      <small class="p-error">
+        @if (form.get('amount')?.errors?.['required']) {
+          <span>Amount is required.</span>
+        } @else if (form.get('amount')?.errors?.['min']) {
+          <span>Must be greater than 0.</span>
+        } @else if (form.get('amount')?.errors?.['max']) {
+          <span>Cannot exceed 100,000.</span>
+        }
+      </small>
+    }
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="date" class="font-medium">Date <span class="text-pink-600">*</span></label>
+    <p-datepicker id="date" formControlName="date" [maxDate]="maxDate" [showIcon]="true" styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
+    
+    @if (form.get('date')?.touched && form.get('date')?.invalid) {
+      <small class="p-error">Date is required.</small>
+    }
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="merchant" class="font-medium">Merchant <span class="text-pink-600">*</span></label>
+    <input id="merchant" type="text" pInputText formControlName="merchant" placeholder="Merchant Name" class="w-full" />
+    
+    @if (form.get('merchant')?.touched && form.get('merchant')?.invalid) {
+      <small class="p-error">
+        @if (form.get('merchant')?.errors?.['required']) {
+          <span>Merchant is required.</span>
+        } @else if (form.get('merchant')?.errors?.['minlength']) {
+          <span>Minimum 3 characters.</span>
+        } @else if (form.get('merchant')?.errors?.['maxlength']) {
+          <span>Maximum 50 characters.</span>
+        }
+      </small>
+    }
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="category" class="font-medium">Category <span class="text-pink-600">*</span></label>
+    <p-select id="category" formControlName="category" [options]="(categories$ | async) || []" placeholder="Select Category" styleClass="w-full"></p-select>
+    
+    @if (form.get('category')?.touched && form.get('category')?.invalid) {
+      <small class="p-error">Category is required.</small>
+    }
+  </div>
+
+  <div class="flex justify-content-end gap-2 mt-3">
+    <p-button type="button" label="Cancel" styleClass="p-button-outlined p-button-secondary" (onClick)="cancel()"></p-button>
+    <p-button type="submit" label="Submit" [disabled]="form.invalid"></p-button>
+  </div>
+</form>

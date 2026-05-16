@@ -1,0 +1,21 @@
+<aside class="sidebar" [class.collapsed]="!open()">
+
+  <nav class="nav">
+
+    @for (item of navItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <i [class]="'pi ' + item.icon"></i>
+
+        @if (open()) {
+          <span>{{ item.label }}</span>
+        }
+      </a>
+    }
+
+  </nav>
+
+</aside>

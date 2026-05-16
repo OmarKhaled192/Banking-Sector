@@ -1,0 +1,16 @@
+<p-card styleClass="stat-card">
+  <div class="content">
+    <div class="text">
+      <p class="label">{{ label }}</p>
+      <p class="value">{{ value }}</p>
+
+      @if (sub) {
+        <p class="sub">{{ sub }}</p>
+      }
+    </div>
+
+    <div class="icon-box" [style.background]="iconBg">
+      <i [class]="'pi ' + icon" [style.color]="iconColor"></i>
+    </div>
+  </div>
+</p-card>

@@ -1,0 +1,60 @@
+<div class="flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="text-3xl font-bold m-0 text-900">Customer Management</h2>
+    <p class="text-600 mt-2">Select a customer to view their profile and accounts</p>
+  </div>
+</div>
+
+<p-card styleClass="shadow-2 border-round-xl">
+  <p-table #dt [value]="(customers$ | async) || []" [paginator]="true" [rows]="10" [globalFilterFields]="['name','CIF','nationalId','email']" [rowHover]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <span class="p-input-icon-left w-full sm:w-20rem">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search customers..." class="w-full" />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="CIF">CIF <p-sortIcon field="CIF"></p-sortIcon></th>
+        <th pSortableColumn="name">Customer Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="nationalId">National ID <p-sortIcon field="nationalId"></p-sortIcon></th>
+        <th pSortableColumn="segment">Segment <p-sortIcon field="segment"></p-sortIcon></th>
+        <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+        <th>Phone</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-customer>
+      <tr>
+        <td class="font-medium">{{ customer.CIF }}</td>
+        <td>
+          <div class="flex align-items-center">
+            <div class="w-2rem h-2rem border-circle bg-blue-900 text-white flex align-items-center justify-content-center mr-2 font-bold">
+              {{ customer.name.charAt(0) }}
+            </div>
+            <span class="font-bold">{{ customer.name }}</span>
+          </div>
+        </td>
+        <td>{{ customer.nationalId }}</td>
+        <td>
+          <p-tag [value]="customer.segment" [severity]="segmentSeverity[customer.segment] || 'info'"></p-tag>
+        </td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.phone }}</td>
+        <td class="text-center">
+          <p-button icon="pi pi-eye" label="View" size="small" (onClick)="viewDetails(customer.CIF)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7" class="text-center p-4">No customers found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

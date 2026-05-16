@@ -1,0 +1,21 @@
+<div class="min-h-screen surface-ground">
+  <p-toolbar styleClass="bg-blue-900 border-none p-3 border-noround shadow-2 mb-4">
+    <div class="p-toolbar-group-start">
+      <div class="flex align-items-center cursor-pointer" routerLink="/dashboard">
+        <i class="pi pi-building text-white text-3xl mr-2"></i>
+        <span class="text-white font-bold text-xl">Banking Portal</span>
+      </div>
+    </div>
+    <div class="p-toolbar-group-end gap-3">
+      <div class="flex align-items-center text-white">
+        <i class="pi pi-user mr-2"></i>
+        <span class="font-medium">{{ userName() }}</span>
+      </div>
+      <p-button icon="pi pi-sign-out" label="Logout" styleClass="p-button-outlined p-button-secondary text-white border-white hover:bg-blue-800" (onClick)="logout()"></p-button>
+    </div>
+  </p-toolbar>
+
+  <div class="page-container pb-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

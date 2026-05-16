@@ -1,0 +1,13 @@
+<div class="bp-page-header">
+  <div class="header-main">
+    @if (icon) {
+      <i [class]="'pi ' + icon + ' icon'"></i>
+    }
+
+    <h2 class="title">{{ title }}</h2>
+  </div>
+
+  @if (subtitle) {
+    <p class="subtitle">{{ subtitle }}</p>
+  }
+</div>

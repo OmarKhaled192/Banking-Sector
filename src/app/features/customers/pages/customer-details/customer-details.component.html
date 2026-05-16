@@ -1,0 +1,94 @@
+<div class="mb-4 flex align-items-center">
+  <p-button icon="pi pi-arrow-left" label="Customers" styleClass="p-button-outlined p-button-secondary mr-3" routerLink="/dashboard"></p-button>
+</div>
+
+@if (customer$ | async; as customer) {
+  <div class="flex justify-content-between align-items-end mb-4">
+    <div>
+      <h2 class="text-3xl font-bold m-0 text-900">{{ customer.name }}</h2>
+      <p class="text-600 mt-2">Customer Profile & Accounts</p>
+    </div>
+    <p-tag [value]="customer.segment" [severity]="segmentSeverity[customer.segment] || 'info'" styleClass="text-lg px-3 py-2"></p-tag>
+  </div>
+
+  <div class="grid">
+    <div class="col-12 md:col-4">
+      <p-card styleClass="shadow-2 border-round-xl h-full">
+        <h3 class="text-xl font-bold text-700 mt-0 mb-4 text-center">Customer Information</h3>
+        
+        <div class="flex flex-column align-items-center mb-5">
+          <div class="w-6rem h-6rem border-circle bg-blue-900 text-white flex align-items-center justify-content-center text-4xl font-bold mb-3">
+            {{ customer.name.charAt(0) }}
+          </div>
+          <h4 class="m-0 text-xl font-bold text-900">{{ customer.name }}</h4>
+          <p-tag [value]="customer.segment" [severity]="segmentSeverity[customer.segment] || 'info'" styleClass="mt-2"></p-tag>
+        </div>
+
+        <div class="flex flex-column gap-3">
+          <div class="flex justify-content-between align-items-center border-bottom-1 border-300 pb-2">
+            <span class="text-600 font-medium">CIF</span>
+            <span class="font-bold text-900">{{ customer.CIF }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center border-bottom-1 border-300 pb-2">
+            <span class="text-600 font-medium">NATIONAL ID</span>
+            <span class="font-bold text-900">{{ customer.nationalId }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center border-bottom-1 border-300 pb-2">
+            <span class="text-600 font-medium">EMAIL</span>
+            <span class="font-bold text-primary">{{ customer.email }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center pb-2">
+            <span class="text-600 font-medium">PHONE</span>
+            <span class="font-bold text-900">{{ customer.phone }}</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-8">
+      <div class="flex justify-content-between align-items-end mb-3">
+        <h3 class="m-0 font-bold text-xl text-900">Accounts</h3>
+        <span class="text-500 text-sm">Click an account to view transactions</span>
+      </div>
+
+      @if (accounts$ | async; as accounts) {
+        <div class="grid">
+          @for (account of accounts; track account.id) {
+            <div class="col-12 lg:col-6">
+              <p-card styleClass="shadow-2 border-round-xl h-full border-1 border-300 hover:border-primary transition-colors transition-duration-200">
+                <div class="flex justify-content-between align-items-start mb-3">
+                  <div>
+                    <div class="text-500 font-bold text-sm uppercase mb-1">{{ account.type }}</div>
+                    <div class="text-900 font-bold text-xl">{{ account.id }}</div>
+                  </div>
+                  <p-tag [value]="account.status" [severity]="statusSeverity[account.status] || 'success'" [rounded]="true"></p-tag>
+                </div>
+                
+                <div class="mb-4">
+                  <span class="text-3xl font-bold text-green-600 mr-2">{{ account.balance | number:'1.2-2' }}</span>
+                  <span class="text-700 font-medium">{{ account.currency }}</span>
+                </div>
+
+                <div class="text-500 text-sm mb-4 line-height-2">
+                  IBAN: {{ account.iban }}
+                </div>
+
+                <p-button label="View Transactions" icon="pi pi-list" styleClass="w-full" (onClick)="viewTransactions(account.id)"></p-button>
+              </p-card>
+            </div>
+          } @empty {
+            <div class="col-12">
+              <p-card styleClass="shadow-1 border-round-xl text-center p-4">
+                <p class="text-600 m-0">No accounts found for this customer.</p>
+              </p-card>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="flex justify-content-center p-6">
+    <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
+  </div>
+}

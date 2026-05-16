@@ -1,0 +1,34 @@
+<header class="bp-topbar">
+
+  <button class="menu-btn" (click)="menuToggle.emit()">
+    <i class="pi pi-bars text-xl"></i>
+  </button>
+
+  <div class="brand">
+    <i class="pi pi-building-columns text-primary text-2xl"></i>
+    <span>BankPortal</span>
+  </div>
+
+  <div class="end">
+    <span class="username">
+      {{ auth.currentUserName() }}
+    </span>
+
+    <p-avatar
+      [label]="auth.currentUserName() | slice:0:1"
+      shape="circle"
+      styleClass="avatar"
+    />
+
+    <p-button
+      icon="pi pi-sign-out"
+      severity="secondary"
+      [text]="true"
+      [rounded]="true"
+      pTooltip="Logout"
+      tooltipPosition="bottom"
+      (onClick)="auth.logout()"
+    />
+  </div>
+
+</header>
