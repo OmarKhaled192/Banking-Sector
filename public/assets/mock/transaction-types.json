@@ -1,0 +1,12 @@
+[
+  {
+    "value": "Debit",
+    "label": "Debit",
+    "icon": "pi pi-arrow-up"
+  },
+  {
+    "value": "Credit",
+    "label": "Credit",
+    "icon": "pi pi-arrow-down"
+  }
+]
