@@ -91,6 +91,34 @@ The application simulates a complete core banking flow, segmented into logical s
    ```
 5. Open your browser and navigate to `http://localhost:4200/`.
 
+## Testing
+
+The project implements a comprehensive testing strategy covering Unit and End-to-End (E2E) testing to ensure application reliability and business rule adherence.
+
+### Unit Tests (Jasmine/Karma)
+All components, services, route guards, and custom validators are fully unit tested.
+To execute unit tests:
+```bash
+npm run test
+```
+To run tests headlessly (for CI environments):
+```bash
+npm run test:headless
+```
+
+### End-to-End (E2E) Tests (Cypress)
+Cypress tests are implemented to validate the entire application flow, covering authentication, data rendering, navigation, and robust form business logic (e.g., cross-field balance validations).
+To execute E2E tests:
+1. Ensure the development server is running (`ng serve`).
+2. Run Cypress in headless mode:
+   ```bash
+   npm run cy:run
+   ```
+3. Or, open the Cypress test runner UI:
+   ```bash
+   npm run cy:open
+   ```
+
 ---
 
 *End of Document*

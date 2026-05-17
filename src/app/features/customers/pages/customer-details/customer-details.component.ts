@@ -23,10 +23,10 @@ export class CustomerDetailsComponent implements OnInit {
   private readonly customerService = inject(CustomerService);
   private readonly accountService = inject(AccountService);
 
-  protected readonly segmentSeverity = SEGMENT_SEVERITY;
-  protected readonly statusSeverity = ACCOUNT_STATUS_SEVERITY;
+  public readonly segmentSeverity = SEGMENT_SEVERITY;
+  public readonly statusSeverity = ACCOUNT_STATUS_SEVERITY;
 
-  protected readonly customer$ = this.route.params.pipe(
+  public readonly customer$ = this.route.params.pipe(
     map(p => p['cif']),
     switchMap(cif => this.customerService.getAll().pipe(
       map(list => list.find(c => c.CIF === cif) || null)
@@ -36,7 +36,7 @@ export class CustomerDetailsComponent implements OnInit {
     })
   );
 
-  protected readonly accounts$ = this.customer$.pipe(
+  public readonly accounts$ = this.customer$.pipe(
     switchMap(customer => {
       if (!customer) return [];
       return this.accountService.getByCustomerId(customer.CIF);

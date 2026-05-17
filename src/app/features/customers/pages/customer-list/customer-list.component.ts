@@ -26,8 +26,8 @@ export class CustomerListComponent {
   private readonly router = inject(Router);
   private readonly customerService = inject(CustomerService);
 
-  protected readonly customers$ = this.customerService.getAll();
-  protected readonly segmentSeverity = SEGMENT_SEVERITY;
+  public readonly customers$ = this.customerService.getAll();
+  public readonly segmentSeverity = SEGMENT_SEVERITY;
 
   ngOnInit(): void {
     this.customerService.clearSelection();

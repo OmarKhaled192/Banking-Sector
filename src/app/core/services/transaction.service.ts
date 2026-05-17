@@ -38,7 +38,7 @@ export class TransactionService {
 
   add(form: NewTransactionForm, accountId: string): Transaction {
     const txn: Transaction = {
-      id: `T${Date.now()}`,
+      id: `T${Date.now()}-${Math.floor(Math.random() * 1000)}`,
       accountId,
       date: form.date.toISOString().split('T')[0],
       type: form.type,
