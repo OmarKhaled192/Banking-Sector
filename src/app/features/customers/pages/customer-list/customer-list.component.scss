@@ -57,7 +57,7 @@
     i {
       position: absolute;
       left: 1rem;
-      color: var(--text-muted);
+      color: #64748b;
       font-size: 0.95rem;
       pointer-events: none;
       z-index: 1;
@@ -70,19 +70,19 @@
       border: 1px solid #e2e8f0 !important;
       border-radius: 99px !important;
       font-size: 0.9rem !important;
-      color: var(--text-primary) !important;
-      background: #f8fafc !important;
+      color: #1e293b !important;
+      background: #ffffff !important;
       transition: all 0.25s ease !important;
 
       &:focus {
         outline: none;
         border-color: var(--primary-color) !important;
-        background: var(--surface-color) !important;
+        background: #ffffff !important;
         box-shadow: 0 0 0 4px rgba(91, 93, 222, 0.08) !important;
       }
 
       &::placeholder {
-        color: var(--text-muted) !important;
+        color: #64748b !important;
       }
 
       @media (max-width: 768px) {
@@ -171,6 +171,12 @@
 ::ng-deep {
   .p-datatable-custom {
     border: none;
+
+    .p-datatable-header {
+      background: #ffffff !important;
+      border: none !important;
+      padding: 0 !important;
+    }
 
     .p-datatable-thead>tr>th,
     .p-datatable-tbody>tr>td {

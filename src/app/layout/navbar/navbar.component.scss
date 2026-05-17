@@ -1,19 +1,25 @@
 .navbar-wrapper {
-  background: var(--bg-color);
+  background: var(--surface-color);
   border-bottom: 1px solid var(--border-color);
-  height: 64px;
-  display: flex;
-  align-items: center;
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
 }
 
-.navbar-content {
-  width: 100%;
-  padding: 0 2rem;
+.navbar-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
   align-items: center;
 }
 
@@ -23,48 +29,139 @@
   gap: 0.75rem;
   cursor: pointer;
 
-  .logo-text {
-    font-size: 1.25rem;
-    color: var(--text-primary);
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 1rem;
+    }
   }
+
+  .logo-text {
+    font-size: 1.125rem;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color);
+  margin: 0 1.5rem;
 }
 
 .breadcrumbs {
   .breadcrumb-item {
     font-size: 0.875rem;
-    color: var(--text-muted);
   }
 }
 
-.user-profile {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-muted);
-  border: 1px solid var(--border-color);
+  padding: 0;
+  
+  &:hover {
+    color: var(--primary-color);
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 2px solid var(--surface-color);
+  }
+}
+
+.user-profile {
+  .avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-glow);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .user-name {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
 }
 
 .sign-out-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
+  background: transparent;
+  border: none;
   color: var(--text-muted);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  padding: 0;
 
   &:hover {
-    background: rgba(239, 68, 68, 0.1);
     color: var(--danger-color);
-    border-color: rgba(239, 68, 68, 0.2);
+  }
+}
+
+.mobile-bottom {
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--surface-color);
+}
+
+.hidden-desktop {
+  display: none !important;
+}
+
+/* Media Query for Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .navbar-top {
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .hidden-desktop {
+    display: flex !important;
+  }
+  
+  div.mobile-bottom.hidden-desktop {
+    display: block !important;
+  }
+  
+  .mobile-bottom {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Override PrimeNG dynamic inline styles for the popup menu to prevent it from going off-screen */
+  ::ng-deep .mobile-dropdown {
+    inset-inline-start: auto !important;
+    left: auto !important;
+    right: 1rem !important;
   }
 }
 

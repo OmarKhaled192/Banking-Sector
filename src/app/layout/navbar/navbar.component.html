@@ -1,29 +1,59 @@
 <div class="navbar-wrapper">
-  <div class="navbar-content">
-    <div class="flex align-items-center gap-3">
+  <div class="navbar-top">
+    <div class="navbar-left">
       <div class="logo-container">
-        <i class="pi pi-home text-gold text-xl"></i>
-        <span class="logo-text font-heading">Bank<span class="text-gold">Core</span></span>
+        <div class="logo-icon">
+          <i class="pi pi-building"></i>
+        </div>
+        <span class="logo-text font-heading">BankCore</span>
       </div>
 
-      <div class="breadcrumbs flex align-items-center gap-2">
-        <i class="pi pi-chevron-right text-muted text-xs"></i>
-        <span class="breadcrumb-item">Customers</span>
+      <div class="divider hidden-mobile"></div>
 
+      <div class="breadcrumbs hidden-mobile flex align-items-center gap-2">
+        <span class="breadcrumb-item text-muted">Customers</span>
         @if (auth.user(); as user) {
         <i class="pi pi-chevron-right text-muted text-xs"></i>
-        <span class="breadcrumb-item text-white">{{ user.name }}</span>
+        <span class="breadcrumb-item text-primary">{{ user.name }}</span>
         }
       </div>
     </div>
-    <div class="flex align-items-center gap-3">
-      <div class="user-profile">
-        <i class="pi pi-user"></i>
+
+    <div class="navbar-right">
+      <button class="icon-btn notification-btn">
+         <i class="pi pi-bell text-xl"></i>
+         <span class="notification-badge"></span>
+      </button>
+
+      <div class="divider hidden-mobile"></div>
+
+      <div class="user-profile hidden-mobile flex align-items-center gap-2">
+        <div class="avatar">
+          <i class="pi pi-user"></i>
+        </div>
+        <span class="user-name">Admin</span>
       </div>
-      <button class="sign-out-btn" (click)="logout()">
+
+      <button class="sign-out-btn hidden-mobile ml-3" (click)="logout()">
         <i class="pi pi-sign-out"></i>
         <span>Sign Out</span>
       </button>
+
+      <button class="icon-btn mobile-menu-btn hidden-desktop ml-3" (click)="menu.toggle($event)">
+         <i class="pi pi-bars text-xl"></i>
+      </button>
+
+      <p-menu #menu [model]="menuItems" [popup]="true" styleClass="mobile-dropdown"></p-menu>
+    </div>
+  </div>
+
+  <div class="mobile-bottom hidden-desktop">
+    <div class="breadcrumbs flex align-items-center gap-2">
+      <span class="breadcrumb-item text-muted">Customers</span>
+      @if (auth.user(); as user) {
+      <i class="pi pi-chevron-right text-muted text-xs"></i>
+      <span class="breadcrumb-item text-primary">{{ user.name }}</span>
+      }
     </div>
   </div>
 </div>
