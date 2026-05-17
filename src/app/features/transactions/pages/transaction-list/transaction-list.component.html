@@ -1,162 +1,167 @@
-@if (cif$ | async; as cif) {
-  <div class="mb-4 flex justify-content-between align-items-center">
-    <div class="flex align-items-center">
-      <p-button icon="pi pi-arrow-left" label="Back" styleClass="p-button-outlined p-button-secondary mr-3" [routerLink]="['/dashboard/customer', cif]"></p-button>
+<div class="page-container">
+  <div class="flex justify-content-between align-items-center mb-6">
+    <div class="flex align-items-center gap-4">
+      <button class="back-btn" [routerLink]="['/dashboard/customer', (cif$ | async)]">
+        <i class="pi pi-arrow-left"></i>
+        <span>Back</span>
+      </button>
       <div>
-        <h2 class="text-3xl font-bold m-0 text-900">Transactions</h2>
-        <p class="text-600 mt-1">Current Account — {{ accountService.selectedId() }}</p>
+        <h1 class="text-4xl font-heading m-0">Transactions</h1>
+        <p class="text-muted mt-1">
+          @if (accountService.selectedAccount(); as account) {
+          {{ account.type }} — {{ account.id }}
+          }
+        </p>
       </div>
     </div>
-    <div class="flex gap-2">
-      <p-button icon="pi pi-file-excel" label="Export CSV" styleClass="p-button-outlined p-button-secondary" (onClick)="exportCsv()"></p-button>
-      <p-button icon="pi pi-plus" label="New Transaction" (onClick)="openNewTransaction()"></p-button>
-    </div>
-  </div>
-}
 
-@if (insights) {
-  <div class="grid mb-4">
-    <div class="col-12 md:col-3">
-      <p-card styleClass="shadow-2 border-round-xl h-full text-center">
-        <h3 class="text-4xl font-bold text-green-600 m-0">{{ accountService.selectedBalance() | number:'1.2-2' }}</h3>
-        <p class="text-500 font-bold text-sm uppercase mt-2">Balance (EGP)</p>
-      </p-card>
-    </div>
-    <div class="col-12 md:col-3">
-      <p-card styleClass="shadow-2 border-round-xl h-full text-center">
-        <h3 class="text-4xl font-bold text-900 m-0">{{ insights.transactionCount }}</h3>
-        <p class="text-500 font-bold text-sm uppercase mt-2">Transactions</p>
-      </p-card>
-    </div>
-    <div class="col-12 md:col-3">
-      <p-card styleClass="shadow-2 border-round-xl h-full text-center">
-        <h3 class="text-4xl font-bold text-900 m-0">{{ insights.totalDebit | number:'1.2-2' }}</h3>
-        <p class="text-500 font-bold text-sm uppercase mt-2">Total Debits</p>
-      </p-card>
-    </div>
-    <div class="col-12 md:col-3">
-      <p-card styleClass="shadow-2 border-round-xl h-full text-center">
-        <h3 class="text-4xl font-bold text-900 m-0">{{ insights.totalCredit | number:'1.2-2' }}</h3>
-        <p class="text-500 font-bold text-sm uppercase mt-2">Total Credits</p>
-      </p-card>
+    <div class="flex gap-3">
+      <button class="action-btn-secondary" (click)="exportCsv()">
+        <i class="pi pi-download"></i>
+        <span>Export CSV</span>
+      </button>
+      <button class="action-btn-primary" (click)="openNewTransaction()">
+        <i class="pi pi-plus"></i>
+        <span>New Transaction</span>
+      </button>
     </div>
   </div>
 
-  <p-card styleClass="shadow-2 border-round-xl mb-4">
-    <ng-template pTemplate="header">
-      <div class="px-4 pt-4 pb-2 border-bottom-1 border-200">
-        <h3 class="m-0 text-xl font-bold text-900">Monthly Insights</h3>
-      </div>
-    </ng-template>
-    
-    <div class="flex align-items-center text-600 mb-4">
-      <i class="pi pi-calendar mr-2"></i>
-      <span>Current month</span>
-    </div>
-
-    <div class="grid">
-      <div class="col-12 md:col-3">
-        <div class="border-1 border-300 border-round-lg p-4 text-center h-full flex flex-column justify-content-center bg-gray-50">
-          <h4 class="text-2xl font-bold text-900 m-0">{{ insights.totalDebit | number:'1.2-2' }}</h4>
-          <p class="text-500 font-bold text-xs uppercase mt-2 m-0">Month Debits (EGP)</p>
+  <div class="grid mb-6">
+    <div class="col-12 md:col-3">
+      <div class="glass-card stat-card">
+        <div class="flex justify-content-between align-items-start mb-3">
+          <span class="stat-label">BALANCE</span>
+          <div class="stat-icon icon-green"><i class="pi pi-wallet"></i></div>
         </div>
-      </div>
-      <div class="col-12 md:col-3">
-        <div class="border-1 border-300 border-round-lg p-4 text-center h-full flex flex-column justify-content-center bg-gray-50">
-          <h4 class="text-2xl font-bold text-900 m-0">{{ insights.totalCredit | number:'1.2-2' }}</h4>
-          <p class="text-500 font-bold text-xs uppercase mt-2 m-0">Month Credits (EGP)</p>
-        </div>
-      </div>
-      <div class="col-12 md:col-3">
-        <div class="border-1 border-300 border-round-lg p-4 text-center h-full flex flex-column justify-content-center bg-gray-50">
-          <h4 class="text-2xl font-bold text-900 m-0">{{ insights.highestSpendingCategory }}</h4>
-          <p class="text-500 font-bold text-xs uppercase mt-2 m-0">Top Spending Category</p>
-        </div>
-      </div>
-      <div class="col-12 md:col-3">
-        <div class="border-1 border-300 border-round-lg p-4 text-center h-full flex flex-column justify-content-center bg-gray-50">
-          <h4 class="text-2xl font-bold m-0" [ngClass]="insights.netFlow >= 0 ? 'text-primary' : 'text-pink-600'">{{ insights.netFlow | number:'1.2-2' }}</h4>
-          <p class="text-500 font-bold text-xs uppercase mt-2 m-0">Net Flow (EGP)</p>
+        <div class="stat-value">
+          {{ (accountService.selectedAccount()?.balance || 0) | number:'1.2-2' }}
+          <span class="stat-currency">EGP</span>
         </div>
       </div>
     </div>
-  </p-card>
-}
-
-<p-card styleClass="shadow-2 border-round-xl">
-  <p-table #dt [value]="(transactions$ | async) || []" [paginator]="true" [rows]="10" [globalFilterFields]="['merchant','category','type','id']" [rowHover]="true">
-    <ng-template pTemplate="caption">
-      <div class="flex flex-column md:flex-row md:align-items-center justify-content-between gap-3">
-        <h3 class="m-0 text-xl font-bold text-900 flex align-items-center"><i class="pi pi-list mr-2"></i> Transaction History</h3>
-        
-        <div class="flex flex-wrap gap-2 align-items-center">
-          <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search transactions..." />
-          </span>
+    <div class="col-12 md:col-3">
+      <div class="glass-card stat-card">
+        <div class="flex justify-content-between align-items-start mb-3">
+          <span class="stat-label">TRANSACTIONS</span>
+          <div class="stat-icon icon-blue"><i class="pi pi-list"></i></div>
+        </div>
+        <div class="stat-value">
+          {{ insights.transactionCount }}
+          <span class="stat-currency text-sm">TOTAL</span>
         </div>
       </div>
-    </ng-template>
-    
-    <ng-template pTemplate="header">
-      <tr>
-        <th>ID</th>
-        <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
-        <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
-        <th pSortableColumn="merchant">Merchant <p-sortIcon field="merchant"></p-sortIcon></th>
-        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-        <th pSortableColumn="amount" class="text-right">Amount (EGP) <p-sortIcon field="amount"></p-sortIcon></th>
-      </tr>
-      <tr>
-        <th>
-          <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'id', 'contains')" placeholder="ID" class="w-full p-column-filter">
-        </th>
-        <th>
-          <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'date', 'contains')" placeholder="Date" class="w-full p-column-filter">
-        </th>
-        <th>
-          <p-select [options]="(types$ | async) || []" optionLabel="label" optionValue="value" (onChange)="dt.filter($event.value, 'type', 'equals')" styleClass="w-full p-column-filter" placeholder="Any" [showClear]="true">
-            <ng-template let-option pTemplate="item">
-              <p-tag [value]="option.label" [severity]="typeSeverity[option.value] || 'info'"></p-tag>
-            </ng-template>
-          </p-select>
-        </th>
-        <th>
-          <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'merchant', 'contains')" placeholder="Search" class="w-full p-column-filter">
-        </th>
-        <th>
-          <p-select [options]="(categories$ | async) || []" (onChange)="dt.filter($event.value, 'category', 'equals')" styleClass="w-full p-column-filter" placeholder="Any" [showClear]="true"></p-select>
-        </th>
-        <th></th>
-      </tr>
-    </ng-template>
-    
-    <ng-template pTemplate="body" let-txn let-rowIndex="rowIndex">
-      <tr>
-        <td class="text-500 font-mono text-sm">{{ txn.id }}</td>
-        <td class="font-medium">{{ txn.date }}</td>
-        <td>
-          <p-tag [value]="txn.type" [severity]="typeSeverity[txn.type] || 'info'"></p-tag>
-        </td>
-        <td class="font-bold">{{ txn.merchant }}</td>
-        <td><p-tag [value]="txn.category" severity="secondary" [rounded]="true"></p-tag></td>
-        <td class="text-right font-bold text-lg" [ngClass]="txn.type === 'Credit' ? 'text-green-600' : 'text-pink-600'">
-          {{ txn.type === 'Credit' ? '+' : '-' }}{{ txn.amount | number:'1.2-2' }}
-        </td>
-      </tr>
-    </ng-template>
+    </div>
+    <div class="col-12 md:col-3">
+      <div class="glass-card stat-card">
+        <div class="flex justify-content-between align-items-start mb-3">
+          <span class="stat-label">TOTAL DEBITS</span>
+          <div class="stat-icon icon-red"><i class="pi pi-arrow-down"></i></div>
+        </div>
+        <div class="stat-value">
+          {{ insights.totalDebit | number:'1.2-2' }}
+          <span class="stat-currency">EGP</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-3">
+      <div class="glass-card stat-card">
+        <div class="flex justify-content-between align-items-start mb-3">
+          <span class="stat-label">TOTAL CREDITS</span>
+          <div class="stat-icon icon-green-alt"><i class="pi pi-arrow-up"></i></div>
+        </div>
+        <div class="stat-value">
+          {{ insights.totalCredit | number:'1.2-2' }}
+          <span class="stat-currency">EGP</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="6" class="text-center p-4">No transactions found.</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</p-card>
+  <div class="glass-card insights-bar mb-6">
+    <div class="flex justify-content-between align-items-center mb-4">
+      <div class="flex align-items-center gap-3">
+        <div class="calendar-icon"><i class="pi pi-calendar"></i></div>
+        <div>
+          <div class="insights-title">Monthly Insights</div>
+          <div class="insights-subtitle">Current month: <span class="text-white">December 2025</span></div>
+        </div>
+      </div>
+      <i class="pi pi-chevron-down text-muted"></i>
+    </div>
 
-<p-dialog header="New Transaction" [(visible)]="showTransactionForm" [modal]="true" [style]="{ width: '450px' }" [draggable]="false" [resizable]="false">
-  @if (showTransactionForm) {
-    <app-transaction-form (saved)="onTransactionAdded($event)"></app-transaction-form>
-  }
+    <div class="grid insights-stats">
+      <div class="col-12 md:col-3">
+        <div class="mini-stat">
+          <span class="mini-label">MONTH DEBITS</span>
+          <div class="mini-value text-danger">{{ insights.totalDebit | number:'1.2-2' }} <span
+              class="mini-curr">EGP</span></div>
+        </div>
+      </div>
+      <div class="col-12 md:col-3">
+        <div class="mini-stat">
+          <span class="mini-label">MONTH CREDITS</span>
+          <div class="mini-value text-success">{{ insights.totalCredit | number:'1.2-2' }} <span
+              class="mini-curr">EGP</span></div>
+        </div>
+      </div>
+      <div class="col-12 md:col-3">
+        <div class="mini-stat">
+          <span class="mini-label">TOP SPENDING</span>
+          <div class="mini-value text-accent">{{ insights.highestSpendingCategory }} <span
+              class="mini-curr">CATEGORY</span></div>
+        </div>
+      </div>
+      <div class="col-12 md:col-3">
+        <div class="mini-stat">
+          <span class="mini-label">NET FLOW</span>
+          <div class="mini-value text-gold">{{ insights.netFlow | number:'1.2-2' }} <span class="mini-curr">EGP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-card p-0 overflow-hidden">
+    <p-table #dt [value]="(transactions$ | async) || []" [paginator]="true" [rows]="10"
+      [globalFilterFields]="['merchant','category','type']" [rowHover]="true" styleClass="p-datatable-custom">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="date">DATE <p-sortIcon field="date"></p-sortIcon></th>
+          <th pSortableColumn="merchant">MERCHANT <p-sortIcon field="merchant"></p-sortIcon></th>
+          <th pSortableColumn="category">CATEGORY <p-sortIcon field="category"></p-sortIcon></th>
+          <th pSortableColumn="type">TYPE <p-sortIcon field="type"></p-sortIcon></th>
+          <th pSortableColumn="amount" class="text-right">AMOUNT <p-sortIcon field="amount"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-transaction>
+        <tr>
+          <td><span class="text-muted">{{ transaction.date | date:'dd MMM yyyy' }}</span></td>
+          <td><span class="font-bold">{{ transaction.merchant }}</span></td>
+          <td>
+            <span class="category-badge">{{ transaction.category }}</span>
+          </td>
+          <td>
+            <span class="type-indicator" [ngClass]="transaction.type">
+              <i class="pi" [ngClass]="transaction.type === 'Credit' ? 'pi-arrow-down' : 'pi-arrow-up'"></i>
+              {{ transaction.type }}
+            </span>
+          </td>
+          <td class="text-right">
+            <span class="font-bold text-lg" [ngClass]="transaction.type === 'Credit' ? 'text-success' : 'text-white'">
+              {{ transaction.type === 'Credit' ? '+' : '-' }}{{ transaction.amount | number:'1.2-2' }}
+            </span>
+            <span class="text-xs text-muted ml-2">EGP</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog [(visible)]="showTransactionForm" [modal]="true" [header]="'New Transaction'" [style]="{width: '500px'}"
+  styleClass="custom-dialog">
+  <app-transaction-form (saved)="onTransactionAdded($event)"></app-transaction-form>
 </p-dialog>
->

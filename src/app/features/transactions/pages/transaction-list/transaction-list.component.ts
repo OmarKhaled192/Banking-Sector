@@ -53,7 +53,7 @@ export class TransactionListComponent implements OnInit {
     switchMap((accountId: any) => this.transactionService.getByAccountId(accountId))
   );
 
-  insights!: MonthlyInsights;
+  insights: any;
   typeSeverity = TXN_TYPE_SEVERITY;
   showTransactionForm = false;
 

@@ -1,21 +1,33 @@
-<div class="min-h-screen surface-ground">
-  <p-toolbar styleClass="bg-blue-900 border-none p-3 border-noround shadow-2 mb-4">
-    <div class="p-toolbar-group-start">
-      <div class="flex align-items-center cursor-pointer" routerLink="/dashboard">
-        <i class="pi pi-building text-white text-3xl mr-2"></i>
-        <span class="text-white font-bold text-xl">Banking Portal</span>
+<div class="navbar-wrapper">
+  <div class="navbar-content">
+    <div class="flex align-items-center gap-3">
+      <div class="logo-container">
+        <i class="pi pi-home text-gold text-xl"></i>
+        <span class="logo-text font-heading">Bank<span class="text-gold">Core</span></span>
       </div>
-    </div>
-    <div class="p-toolbar-group-end gap-3">
-      <div class="flex align-items-center text-white">
-        <i class="pi pi-user mr-2"></i>
-        <span class="font-medium">{{ userName() }}</span>
-      </div>
-      <p-button icon="pi pi-sign-out" label="Logout" styleClass="p-button-outlined p-button-secondary text-white border-white hover:bg-blue-800" (onClick)="logout()"></p-button>
-    </div>
-  </p-toolbar>
 
-  <div class="page-container pb-6">
-    <router-outlet></router-outlet>
+      <div class="breadcrumbs flex align-items-center gap-2">
+        <i class="pi pi-chevron-right text-muted text-xs"></i>
+        <span class="breadcrumb-item">Customers</span>
+
+        @if (auth.user(); as user) {
+        <i class="pi pi-chevron-right text-muted text-xs"></i>
+        <span class="breadcrumb-item text-white">{{ user.name }}</span>
+        }
+      </div>
+    </div>
+    <div class="flex align-items-center gap-3">
+      <div class="user-profile">
+        <i class="pi pi-user"></i>
+      </div>
+      <button class="sign-out-btn" (click)="logout()">
+        <i class="pi pi-sign-out"></i>
+        <span>Sign Out</span>
+      </button>
+    </div>
   </div>
+</div>
+
+<div class="main-content">
+  <router-outlet></router-outlet>
 </div>

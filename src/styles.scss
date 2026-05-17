@@ -1,41 +1,124 @@
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 
-body {
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f8fafc;
-  color: #334155;
+:root {
+  --bg-color: #0b0e14;
+  --surface-color: #151b23;
+  --surface-hover: #1c242f;
+  --primary-color: #facc15;
+  --primary-glow: rgba(250, 204, 21, 0.15);
+  --accent-color: #6366f1;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --success-color: #22c55e;
+  --danger-color: #ef4444;
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  margin-bottom: 1.5rem;
+body {
+  margin: 0;
+  font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 .page-container {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.form-field {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
 }
 
-.form-field label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  font-size: 0.875rem;
+/* Custom Typography */
+.text-gold { color: var(--primary-color); }
+.text-muted { color: var(--text-muted); }
+.font-heading { font-weight: 700; letter-spacing: -0.02em; }
+
+/* PrimeNG Overrides */
+.p-card {
+  background: var(--surface-color) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--card-shadow) !important;
 }
 
-.error-message {
-  color: #ef4444;
+.p-datatable {
+  .p-datatable-thead > tr > th {
+    background: transparent !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 1rem !important;
+  }
+
+  .p-datatable-tbody > tr {
+    background: transparent !important;
+    color: var(--text-main) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+
+    &:hover {
+      background: var(--surface-hover) !important;
+    }
+  }
+}
+
+.p-button {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  
+  &.p-button-primary {
+    background: var(--primary-color) !important;
+    color: var(--bg-color) !important;
+    border: none !important;
+    
+    &:hover {
+      background: #eab308 !important;
+      box-shadow: 0 0 15px var(--primary-glow) !important;
+    }
+  }
+
+  &.p-button-secondary {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-color) !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+}
+
+/* Custom Tag System */
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 99px;
   font-size: 0.75rem;
-  margin-top: 0.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  
+  &.Retail { background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); }
+  &.Priority { background: rgba(250, 204, 21, 0.1); color: var(--primary-color); border: 1px solid rgba(250, 204, 21, 0.2); }
+  &.Active { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+  &.Inactive { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
 }
