@@ -2,7 +2,7 @@
   <div class="flex flex-column md:flex-row justify-content-between align-items-start md:align-items-center gap-4 mb-6">
     <div class="flex align-items-center gap-4">
       @if (cif$ | async; as cif) {
-        <app-back-btn [route]="['/dashboard/customer', cif]"></app-back-btn>
+      <app-back-btn [route]="['/dashboard/customer', cif]"></app-back-btn>
       }
       <div>
         <app-heading level="h1" color="primary">Transactions</app-heading>
@@ -15,23 +15,29 @@
     </div>
 
     <div class="flex gap-3 w-full md:w-auto">
-      <app-button variant="outline" icon="pi pi-download" label="Export CSV" (clicked)="exportCsv()" class="flex-1 md:flex-none"></app-button>
-      <app-button variant="primary" icon="pi pi-plus" label="New Transaction" (clicked)="openNewTransaction()" class="flex-1 md:flex-none"></app-button>
+      <app-button variant="outline" icon="pi pi-download" label="Export CSV" (clicked)="exportCsv()"
+        class="flex-1 md:flex-none"></app-button>
+      <app-button variant="primary" icon="pi pi-plus" label="New Transaction" (clicked)="openNewTransaction()"
+        class="flex-1 md:flex-none"></app-button>
     </div>
   </div>
 
   <div class="grid mb-6">
     <div class="col-12 md:col-3">
-      <bp-stat-card label="BALANCE" [value]="((accountService.selectedAccount()?.balance || 0) | number:'1.2-2') || '0'" sub="EGP" icon="pi-wallet" iconColor="#22c55e" iconBg="rgba(34, 197, 94, 0.1)"></bp-stat-card>
+      <bp-stat-card label="BALANCE" [value]="((accountService.selectedAccount()?.balance || 0) | number:'1.2-2') || '0'"
+        sub="EGP" icon="pi-wallet" iconColor="#22c55e" iconBg="rgba(34, 197, 94, 0.1)"></bp-stat-card>
     </div>
     <div class="col-12 md:col-3">
-      <bp-stat-card label="TRANSACTIONS" [value]="(insights?.transactionCount | number) || '0'" sub="TOTAL" icon="pi-list" iconColor="#6366f1" iconBg="rgba(99, 102, 241, 0.1)"></bp-stat-card>
+      <bp-stat-card label="TRANSACTIONS" [value]="(insights?.transactionCount | number) || '0'" sub="TOTAL"
+        icon="pi-list" iconColor="#6366f1" iconBg="rgba(99, 102, 241, 0.1)"></bp-stat-card>
     </div>
     <div class="col-12 md:col-3">
-      <bp-stat-card label="TOTAL DEBITS" [value]="(insights?.totalDebit | number:'1.2-2') || '0'" sub="EGP" icon="pi-arrow-down" iconColor="#ef4444" iconBg="rgba(239, 68, 68, 0.1)"></bp-stat-card>
+      <bp-stat-card label="TOTAL DEBITS" [value]="(insights?.totalDebit | number:'1.2-2') || '0'" sub="EGP"
+        icon="pi-arrow-down" iconColor="#ef4444" iconBg="rgba(239, 68, 68, 0.1)"></bp-stat-card>
     </div>
     <div class="col-12 md:col-3">
-      <bp-stat-card label="TOTAL CREDITS" [value]="(insights?.totalCredit | number:'1.2-2') || '0'" sub="EGP" icon="pi-arrow-up" iconColor="#10b981" iconBg="rgba(16, 185, 129, 0.1)"></bp-stat-card>
+      <bp-stat-card label="TOTAL CREDITS" [value]="(insights?.totalCredit | number:'1.2-2') || '0'" sub="EGP"
+        icon="pi-arrow-up" iconColor="#10b981" iconBg="rgba(16, 185, 129, 0.1)"></bp-stat-card>
     </div>
   </div>
 
@@ -101,12 +107,13 @@
             <app-badge variant="info" [rounded]="true">{{ transaction.category }}</app-badge>
           </td>
           <td>
-            <app-badge [variant]="transaction.type === 'Credit' ? 'success' : 'danger'" [icon]="transaction.type === 'Credit' ? 'pi pi-arrow-down' : 'pi pi-arrow-up'">
+            <app-badge [variant]="transaction.type === 'Credit' ? 'success' : 'danger'"
+              [icon]="transaction.type === 'Credit' ? 'pi pi-arrow-down' : 'pi pi-arrow-up'">
               {{ transaction.type }}
             </app-badge>
           </td>
           <td class="text-right">
-            <span class="font-bold text-lg" [ngClass]="transaction.type === 'Credit' ? 'text-success' : 'text-white'">
+            <span class="font-bold text-lg" [ngClass]="transaction.type === 'Credit' ? 'text-success' : 'text-danger'">
               {{ transaction.type === 'Credit' ? '+' : '-' }}{{ transaction.amount | number:'1.2-2' }}
             </span>
             <span class="text-xs text-muted ml-2">EGP</span>

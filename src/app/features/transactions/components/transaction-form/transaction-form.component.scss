@@ -43,6 +43,17 @@
       border-color: rgba(99, 102, 241, 0.4) !important;
       outline: none;
     }
+
+    &.ng-invalid.ng-touched {
+      border-color: var(--text-danger, #dc3545) !important;
+      box-shadow: 0 0 0 1px var(--text-danger, #dc3545) !important;
+    }
+  }
+
+  ::ng-deep p-inputnumber.ng-invalid.ng-touched input,
+  ::ng-deep p-datepicker.ng-invalid.ng-touched input {
+    border-color: var(--text-danger, #dc3545) !important;
+    box-shadow: 0 0 0 1px var(--text-danger, #dc3545) !important;
   }
 }
 
@@ -64,5 +75,10 @@
 
   .p-select-trigger-icon {
     color: var(--text-primary) !important;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: var(--text-danger, #dc3545) !important;
+    box-shadow: 0 0 0 1px var(--text-danger, #dc3545) !important;
   }
 }

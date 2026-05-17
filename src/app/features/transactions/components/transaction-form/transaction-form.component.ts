@@ -7,6 +7,7 @@ import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { TooltipModule } from 'primeng/tooltip';
 import { TransactionType, TransactionCategory } from '../../../../core/models/transaction/transaction.model';
 import { TransactionService } from '../../../../core/services/transaction.service';
 import { AccountService } from '../../../../core/services/account.service';
@@ -24,6 +25,7 @@ import { ButtonComponent } from '../../../../shared/components';
     DatePickerModule,
     ButtonModule,
     MessageModule,
+    TooltipModule,
     ButtonComponent
   ],
   templateUrl: './transaction-form.component.html',
