@@ -12,6 +12,14 @@ This project is a small banking front-end portal built with Angular. The primary
 
 ---
 
+## Live Demo
+
+The application is deployed and accessible here:
+
+🔗 https://omarkhaled192.github.io/Banking-Sector
+
+---
+
 ## Test Data & Credentials
 
 * Real user: admin@bankportal.com / Admin@1234
