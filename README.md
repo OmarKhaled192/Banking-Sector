@@ -2,7 +2,7 @@
 
 This project is a small banking front-end portal built with Angular. The primary goal is to provide a robust user interface for managing customers, accounts, and transactions with a focus on architecture, performance, reactive state management, and clear business logic handling.
 
-## 🚀 Technology Stack
+## Technology Stack
 - **Framework:** Angular (latest stable)
 - **Data Layer:** Static JSON files (assets/mock) + `localStorage` persistence
 - **State Management:** RxJS (Observables, `shareReplay`) & Angular Signals
@@ -12,7 +12,7 @@ This project is a small banking front-end portal built with Angular. The primary
 
 ---
 
-## 📖 System Flows
+## System Flows
 
 The application simulates a complete core banking flow, segmented into logical steps:
 
@@ -69,7 +69,7 @@ The application simulates a complete core banking flow, segmented into logical s
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Node.js (v18 or higher recommended)
