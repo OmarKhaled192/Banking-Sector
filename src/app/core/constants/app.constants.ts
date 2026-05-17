@@ -1,4 +1,4 @@
-export const API_BASE = '/assets/mock';
+export const API_BASE = 'assets/mock';
 
 export const MOCK_CREDENTIALS = {
   email: 'admin@bankportal.com',

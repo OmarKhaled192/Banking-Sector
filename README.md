@@ -12,6 +12,14 @@ This project is a small banking front-end portal built with Angular. The primary
 
 ---
 
+## Test Data & Credentials
+
+* Real user: admin@bankportal.com / Admin@1234
+* Test customers: C001 (Ahmed Ali), C002 (Mona Hassan)
+* Test accounts: A1001, A1002 (belong to C001)
+
+---
+
 ## System Flows
 
 The application simulates a complete core banking flow, segmented into logical steps:

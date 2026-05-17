@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, map, firstValueFrom } from 'rxjs';
 import { Customer, Account, Transaction } from '../models/common/banking.model';
+import { API_BASE } from '../constants/app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +28,11 @@ export class BankingStateService {
 
     try {
       const [customers, accounts, transactions, types, categories] = await Promise.all([
-        firstValueFrom(this.http.get<Customer[]>('/assets/mock/customers.json')),
-        firstValueFrom(this.http.get<Account[]>('/assets/mock/accounts.json')),
-        firstValueFrom(this.http.get<Transaction[]>('/assets/mock/transactions.json')),
-        firstValueFrom(this.http.get<string[]>('/assets/mock/transaction-types.json')),
-        firstValueFrom(this.http.get<string[]>('/assets/mock/transaction-categories.json'))
+        firstValueFrom(this.http.get<Customer[]>(`${API_BASE}/customers.json`)),
+        firstValueFrom(this.http.get<Account[]>(`${API_BASE}/accounts.json`)),
+        firstValueFrom(this.http.get<Transaction[]>(`${API_BASE}/transactions.json`)),
+        firstValueFrom(this.http.get<string[]>(`${API_BASE}/transaction-types.json`)),
+        firstValueFrom(this.http.get<string[]>(`${API_BASE}/transaction-categories.json`))
       ]);
 
       this.customersSubject.next(customers);
