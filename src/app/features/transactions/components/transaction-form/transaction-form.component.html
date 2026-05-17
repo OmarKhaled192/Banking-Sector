@@ -1,16 +1,16 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-column gap-5">
   @if (errorMessage) {
-    <p-message severity="error" [text]="errorMessage" styleClass="w-full"></p-message>
+  <p-message severity="error" [text]="errorMessage" styleClass="w-full"></p-message>
   }
 
   <div class="form-group">
     <label>TRANSACTION TYPE</label>
-    <p-select id="type" formControlName="type" [options]="(types$ | async) || []" 
-              optionLabel="label" optionValue="value" placeholder="Select Type" 
-              styleClass="w-full custom-select">
+    <p-select id="type" formControlName="type" [options]="(types$ | async) || []" optionLabel="label"
+      optionValue="value" placeholder="Select Type" styleClass="w-full custom-select">
       <ng-template pTemplate="selectedItem" let-selectedOption>
         <div class="flex align-items-center gap-2" *ngIf="selectedOption">
-          <i [class]="selectedOption.icon" [ngClass]="selectedOption.value === 'Credit' ? 'text-success' : 'text-danger'"></i>
+          <i [class]="selectedOption.icon"
+            [ngClass]="selectedOption.value === 'Credit' ? 'text-success' : 'text-danger'"></i>
           <span>{{ selectedOption.label }}</span>
         </div>
       </ng-template>
@@ -27,8 +27,8 @@
     <label>AMOUNT (EGP)</label>
     <div class="input-wrapper">
       <i class="pi pi-dollar"></i>
-      <p-inputNumber formControlName="amount" [minFractionDigits]="2" [maxFractionDigits]="2" 
-                    placeholder="0.00" styleClass="w-full" inputStyleClass="w-full"></p-inputNumber>
+      <p-inputNumber formControlName="amount" [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.00"
+        styleClass="w-full" inputStyleClass="w-full"></p-inputNumber>
     </div>
   </div>
 
@@ -38,16 +38,16 @@
         <label>DATE</label>
         <div class="input-wrapper">
           <i class="pi pi-calendar"></i>
-          <p-datepicker formControlName="date" [maxDate]="maxDate" [showIcon]="false" 
-                        styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
+          <p-datepicker formControlName="date" [maxDate]="maxDate" [showIcon]="false" placeholder="Select Date" styleClass="w-full"
+            inputStyleClass="w-full"></p-datepicker>
         </div>
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="form-group">
         <label>CATEGORY</label>
-        <p-select formControlName="category" [options]="(categories$ | async) || []" 
-                  placeholder="Select Category" styleClass="w-full custom-select"></p-select>
+        <p-select formControlName="category" [options]="(categories$ | async) || []" placeholder="Select Category"
+          styleClass="w-full custom-select"></p-select>
       </div>
     </div>
   </div>
@@ -56,12 +56,13 @@
     <label>MERCHANT</label>
     <div class="input-wrapper">
       <i class="pi pi-shop"></i>
-      <input type="text" pInputText formControlName="merchant" placeholder="Merchant or Recipient Name" class="w-full" />
+      <input type="text" pInputText formControlName="merchant" placeholder="Merchant or Recipient Name"
+        class="w-full" />
     </div>
   </div>
 
   <div class="flex justify-content-end gap-3 mt-4">
-    <button type="button" class="action-btn-secondary py-2" (click)="cancel()">Cancel</button>
-    <button type="submit" class="action-btn-primary py-2" [disabled]="form.invalid">Submit Transaction</button>
+    <app-button type="button" variant="secondary" label="Cancel" (clicked)="cancel()"></app-button>
+    <app-button type="submit" variant="primary" label="Submit Transaction" [disabled]="form.invalid"></app-button>
   </div>
 </form>

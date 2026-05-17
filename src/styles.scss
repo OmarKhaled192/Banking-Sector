@@ -2,18 +2,27 @@
 @import "primeflex/primeflex.css";
 
 :root {
-  --bg-color: #0b0e14;
-  --surface-color: #151b23;
-  --surface-hover: #1c242f;
-  --primary-color: #facc15;
-  --primary-glow: rgba(250, 204, 21, 0.15);
-  --accent-color: #6366f1;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --success-color: #22c55e;
-  --danger-color: #ef4444;
-  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  /* Light Theme Colors */
+  --bg-color: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --surface-color: #ffffff;
+  --surface-hover: #f8f9fa;
+  --primary-color: #5b5dde;
+  --primary-light: #7c7eed;
+  --primary-dark: #4a4bcd;
+  --primary-glow: rgba(91, 93, 222, 0.15);
+  --accent-color: #5b5dde;
+  --text-main: #212529;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --border-light: #e9ecef;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #0d6efd;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 body {
@@ -22,7 +31,15 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 .page-container {
@@ -34,48 +51,159 @@ body {
 /* Glassmorphism Cards */
 .glass-card {
   background: var(--surface-color);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
   padding: 1.5rem;
   box-shadow: var(--card-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--primary-color);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 }
 
 /* Custom Typography */
-.text-gold { color: var(--primary-color); }
-.text-muted { color: var(--text-muted); }
-.font-heading { font-weight: 700; letter-spacing: -0.02em; }
+.text-primary {
+  color: var(--text-main);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.font-heading {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.font-mono {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+/* Utility Classes */
+.gap-sm {
+  gap: 0.5rem;
+}
+
+.gap-md {
+  gap: 1rem;
+}
+
+.gap-lg {
+  gap: 1.5rem;
+}
+
+.gap-xl {
+  gap: 2rem;
+}
+
+.p-sm {
+  padding: 0.75rem;
+}
+
+.p-md {
+  padding: 1rem;
+}
+
+.p-lg {
+  padding: 1.5rem;
+}
+
+.p-xl {
+  padding: 2rem;
+}
+
+.mt-sm {
+  margin-top: 0.5rem;
+}
+
+.mt-md {
+  margin-top: 1rem;
+}
+
+.mt-lg {
+  margin-top: 1.5rem;
+}
+
+.mt-xl {
+  margin-top: 2rem;
+}
+
+.mb-sm {
+  margin-bottom: 0.5rem;
+}
+
+.mb-md {
+  margin-bottom: 1rem;
+}
+
+.mb-lg {
+  margin-bottom: 1.5rem;
+}
+
+.mb-xl {
+  margin-bottom: 2rem;
+}
 
 /* PrimeNG Overrides */
 .p-card {
   background: var(--surface-color) !important;
   color: var(--text-main) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 16px !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 12px !important;
   box-shadow: var(--card-shadow) !important;
+
+  .p-card-title {
+    font-weight: 700;
+    color: var(--text-main) !important;
+  }
+
+  .p-card-content {
+    color: var(--text-secondary) !important;
+  }
 }
 
 .p-datatable {
-  .p-datatable-thead > tr > th {
-    background: transparent !important;
+  background: var(--surface-color) !important;
+  color: var(--text-main) !important;
+
+  .p-datatable-thead>tr>th {
+    background: var(--surface-hover) !important;
     color: var(--text-muted) !important;
     text-transform: uppercase;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.05em;
-    border-bottom: 1px solid var(--border-color) !important;
+    border-bottom: 2px solid var(--border-light) !important;
+    border-right: 1px solid var(--border-light) !important;
     padding: 1rem !important;
   }
 
-  .p-datatable-tbody > tr {
-    background: transparent !important;
+  .p-datatable-tbody>tr {
+    background: var(--surface-color) !important;
     color: var(--text-main) !important;
-    border-bottom: 1px solid var(--border-color) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+
+    >td {
+      border-right: 1px solid var(--border-light) !important;
+      padding: 1rem !important;
+    }
 
     &:hover {
       background: var(--surface-hover) !important;
@@ -84,41 +212,221 @@ body {
 }
 
 .p-button {
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   font-weight: 600 !important;
-  
+  transition: all 0.3s ease !important;
+
   &.p-button-primary {
-    background: var(--primary-color) !important;
-    color: var(--bg-color) !important;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: #ffffff !important;
     border: none !important;
-    
+    box-shadow: 0 2px 8px rgba(91, 93, 222, 0.2) !important;
+
     &:hover {
-      background: #eab308 !important;
-      box-shadow: 0 0 15px var(--primary-glow) !important;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%) !important;
+      box-shadow: 0 4px 16px rgba(91, 93, 222, 0.3) !important;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 
   &.p-button-secondary {
-    background: rgba(255, 255, 255, 0.05) !important;
+    background: var(--surface-hover) !important;
     color: var(--text-main) !important;
-    border: 1px solid var(--border-color) !important;
-    
+    border: 1px solid var(--border-light) !important;
+
     &:hover {
-      background: rgba(255, 255, 255, 0.1) !important;
+      background: var(--border-light) !important;
+      border-color: var(--primary-color) !important;
+    }
+  }
+
+  &.p-button-danger {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #bd2130 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+
+    &:hover {
+      background: #bd2130 !important;
+    }
+  }
+
+  &.p-button-success {
+    background: linear-gradient(135deg, var(--success-color) 0%, #20c997 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+
+    &:hover {
+      background: #20c997 !important;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+  }
+}
+
+/* PrimeNG Input Overrides */
+.p-inputtext {
+  background: var(--surface-color) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+
+  &:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(91, 93, 222, 0.1) !important;
+  }
+}
+
+.p-dropdown {
+  background: var(--surface-color) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 8px !important;
+
+  .p-dropdown-trigger {
+    color: var(--text-muted) !important;
+  }
+}
+
+.p-dialog {
+  .p-dialog-header {
+    background: var(--surface-color) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+  }
+
+  .p-dialog-content {
+    background: var(--surface-color) !important;
+    color: var(--text-main) !important;
+  }
+}
+
+/* Custom Badge/Status System */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.Retail {
+    background: rgba(91, 93, 222, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(91, 93, 222, 0.2);
+  }
+
+  &.Priority {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ff9800;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+  }
+
+  &.Business {
+    background: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+  }
+
+  &.Active {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+  }
+
+  &.Inactive {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+  }
+
+  &.Debit {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+  }
+
+  &.Credit {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+  }
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-hover);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--border-color);
+  }
+}
+
+/* Selection Styles */
+::selection {
+  background: var(--primary-color);
+  color: var(--text-primary);
+}
+
+/* Focus Styles */
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1.5rem;
+  }
+
+  .p-datatable {
+    font-size: 0.875rem !important;
+
+    .p-datatable-thead>tr>th {
+      padding: 0.75rem !important;
+    }
+
+    .p-datatable-tbody>tr>td {
+      padding: 0.75rem !important;
     }
   }
 }
 
-/* Custom Tag System */
-.status-badge {
-  padding: 0.4rem 0.8rem;
-  border-radius: 99px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  
-  &.Retail { background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); }
-  &.Priority { background: rgba(250, 204, 21, 0.1); color: var(--primary-color); border: 1px solid rgba(250, 204, 21, 0.2); }
-  &.Active { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
-  &.Inactive { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+@media (max-width: 480px) {
+  .page-container {
+    padding: 1rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .glass-card,
+  .p-card {
+    box-shadow: none !important;
+    border: 1px solid #000000 !important;
+  }
 }

@@ -10,6 +10,7 @@ import { MessageModule } from 'primeng/message';
 import { TransactionType, TransactionCategory } from '../../../../core/models/transaction/transaction.model';
 import { TransactionService } from '../../../../core/services/transaction.service';
 import { AccountService } from '../../../../core/services/account.service';
+import { ButtonComponent } from '../../../../shared/components';
 
 @Component({
   selector: 'app-transaction-form',
@@ -22,7 +23,8 @@ import { AccountService } from '../../../../core/services/account.service';
     SelectModule,
     DatePickerModule,
     ButtonModule,
-    MessageModule
+    MessageModule,
+    ButtonComponent
   ],
   templateUrl: './transaction-form.component.html',
   styleUrl: './transaction-form.component.scss'
@@ -51,7 +53,7 @@ export class TransactionFormComponent implements OnInit {
       ]
     ),
     date: this.fb.control<Date | null>(
-      new Date(),
+      null,
       Validators.required
     ),
     merchant: this.fb.nonNullable.control(
@@ -109,7 +111,7 @@ export class TransactionFormComponent implements OnInit {
     this.form.reset({
       type: '',
       amount: null,
-      date: new Date(),
+      date: null,
       merchant: '',
       category: ''
     });

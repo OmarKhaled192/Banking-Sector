@@ -1,80 +1,37 @@
 <div class="page-container">
-  <div class="flex justify-content-between align-items-center mb-6">
+  <div class="flex flex-column md:flex-row justify-content-between align-items-start md:align-items-center gap-4 mb-6">
     <div class="flex align-items-center gap-4">
-      <button class="back-btn" [routerLink]="['/dashboard/customer', (cif$ | async)]">
-        <i class="pi pi-arrow-left"></i>
-        <span>Back</span>
-      </button>
+      @if (cif$ | async; as cif) {
+        <app-back-btn [route]="['/dashboard/customer', cif]"></app-back-btn>
+      }
       <div>
-        <h1 class="text-4xl font-heading m-0">Transactions</h1>
-        <p class="text-muted mt-1">
+        <app-heading level="h1" color="primary">Transactions</app-heading>
+        <app-text variant="body" color="muted">
           @if (accountService.selectedAccount(); as account) {
           {{ account.type }} — {{ account.id }}
           }
-        </p>
+        </app-text>
       </div>
     </div>
 
-    <div class="flex gap-3">
-      <button class="action-btn-secondary" (click)="exportCsv()">
-        <i class="pi pi-download"></i>
-        <span>Export CSV</span>
-      </button>
-      <button class="action-btn-primary" (click)="openNewTransaction()">
-        <i class="pi pi-plus"></i>
-        <span>New Transaction</span>
-      </button>
+    <div class="flex gap-3 w-full md:w-auto">
+      <app-button variant="outline" icon="pi pi-download" label="Export CSV" (clicked)="exportCsv()" class="flex-1 md:flex-none"></app-button>
+      <app-button variant="primary" icon="pi pi-plus" label="New Transaction" (clicked)="openNewTransaction()" class="flex-1 md:flex-none"></app-button>
     </div>
   </div>
 
   <div class="grid mb-6">
     <div class="col-12 md:col-3">
-      <div class="glass-card stat-card">
-        <div class="flex justify-content-between align-items-start mb-3">
-          <span class="stat-label">BALANCE</span>
-          <div class="stat-icon icon-green"><i class="pi pi-wallet"></i></div>
-        </div>
-        <div class="stat-value">
-          {{ (accountService.selectedAccount()?.balance || 0) | number:'1.2-2' }}
-          <span class="stat-currency">EGP</span>
-        </div>
-      </div>
+      <bp-stat-card label="BALANCE" [value]="((accountService.selectedAccount()?.balance || 0) | number:'1.2-2') || '0'" sub="EGP" icon="pi-wallet" iconColor="#22c55e" iconBg="rgba(34, 197, 94, 0.1)"></bp-stat-card>
     </div>
     <div class="col-12 md:col-3">
-      <div class="glass-card stat-card">
-        <div class="flex justify-content-between align-items-start mb-3">
-          <span class="stat-label">TRANSACTIONS</span>
-          <div class="stat-icon icon-blue"><i class="pi pi-list"></i></div>
-        </div>
-        <div class="stat-value">
-          {{ insights.transactionCount }}
-          <span class="stat-currency text-sm">TOTAL</span>
-        </div>
-      </div>
+      <bp-stat-card label="TRANSACTIONS" [value]="(insights?.transactionCount | number) || '0'" sub="TOTAL" icon="pi-list" iconColor="#6366f1" iconBg="rgba(99, 102, 241, 0.1)"></bp-stat-card>
     </div>
     <div class="col-12 md:col-3">
-      <div class="glass-card stat-card">
-        <div class="flex justify-content-between align-items-start mb-3">
-          <span class="stat-label">TOTAL DEBITS</span>
-          <div class="stat-icon icon-red"><i class="pi pi-arrow-down"></i></div>
-        </div>
-        <div class="stat-value">
-          {{ insights.totalDebit | number:'1.2-2' }}
-          <span class="stat-currency">EGP</span>
-        </div>
-      </div>
+      <bp-stat-card label="TOTAL DEBITS" [value]="(insights?.totalDebit | number:'1.2-2') || '0'" sub="EGP" icon="pi-arrow-down" iconColor="#ef4444" iconBg="rgba(239, 68, 68, 0.1)"></bp-stat-card>
     </div>
     <div class="col-12 md:col-3">
-      <div class="glass-card stat-card">
-        <div class="flex justify-content-between align-items-start mb-3">
-          <span class="stat-label">TOTAL CREDITS</span>
-          <div class="stat-icon icon-green-alt"><i class="pi pi-arrow-up"></i></div>
-        </div>
-        <div class="stat-value">
-          {{ insights.totalCredit | number:'1.2-2' }}
-          <span class="stat-currency">EGP</span>
-        </div>
-      </div>
+      <bp-stat-card label="TOTAL CREDITS" [value]="(insights?.totalCredit | number:'1.2-2') || '0'" sub="EGP" icon="pi-arrow-up" iconColor="#10b981" iconBg="rgba(16, 185, 129, 0.1)"></bp-stat-card>
     </div>
   </div>
 
@@ -94,28 +51,28 @@
       <div class="col-12 md:col-3">
         <div class="mini-stat">
           <span class="mini-label">MONTH DEBITS</span>
-          <div class="mini-value text-danger">{{ insights.totalDebit | number:'1.2-2' }} <span
+          <div class="mini-value text-danger">{{ insights?.totalDebit | number:'1.2-2' }} <span
               class="mini-curr">EGP</span></div>
         </div>
       </div>
       <div class="col-12 md:col-3">
         <div class="mini-stat">
           <span class="mini-label">MONTH CREDITS</span>
-          <div class="mini-value text-success">{{ insights.totalCredit | number:'1.2-2' }} <span
+          <div class="mini-value text-success">{{ insights?.totalCredit | number:'1.2-2' }} <span
               class="mini-curr">EGP</span></div>
         </div>
       </div>
       <div class="col-12 md:col-3">
         <div class="mini-stat">
           <span class="mini-label">TOP SPENDING</span>
-          <div class="mini-value text-accent">{{ insights.highestSpendingCategory }} <span
+          <div class="mini-value text-accent">{{ insights?.highestSpendingCategory }} <span
               class="mini-curr">CATEGORY</span></div>
         </div>
       </div>
       <div class="col-12 md:col-3">
         <div class="mini-stat">
           <span class="mini-label">NET FLOW</span>
-          <div class="mini-value text-gold">{{ insights.netFlow | number:'1.2-2' }} <span class="mini-curr">EGP</span>
+          <div class="mini-value text-gold">{{ insights?.netFlow | number:'1.2-2' }} <span class="mini-curr">EGP</span>
           </div>
         </div>
       </div>
@@ -141,13 +98,12 @@
           <td><span class="text-muted">{{ transaction.date | date:'dd MMM yyyy' }}</span></td>
           <td><span class="font-bold">{{ transaction.merchant }}</span></td>
           <td>
-            <span class="category-badge">{{ transaction.category }}</span>
+            <app-badge variant="info" [rounded]="true">{{ transaction.category }}</app-badge>
           </td>
           <td>
-            <span class="type-indicator" [ngClass]="transaction.type">
-              <i class="pi" [ngClass]="transaction.type === 'Credit' ? 'pi-arrow-down' : 'pi-arrow-up'"></i>
+            <app-badge [variant]="transaction.type === 'Credit' ? 'success' : 'danger'" [icon]="transaction.type === 'Credit' ? 'pi pi-arrow-down' : 'pi pi-arrow-up'">
               {{ transaction.type }}
-            </span>
+            </app-badge>
           </td>
           <td class="text-right">
             <span class="font-bold text-lg" [ngClass]="transaction.type === 'Credit' ? 'text-success' : 'text-white'">

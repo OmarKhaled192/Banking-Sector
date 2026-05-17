@@ -1,0 +1,27 @@
+:host ::ng-deep {
+  .back-btn-custom {
+    background: #ffffff !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    transition: all 0.25s ease-in-out !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    cursor: pointer !important;
+
+    // Ensure internal icon and label inherit colors correctly
+    .p-button-label, .p-button-icon {
+      color: inherit !important;
+      transition: all 0.25s ease-in-out !important;
+    }
+
+    &:hover {
+      background: #000000 !important;
+      border-color: #000000 !important;
+      color: #ffffff !important;
+    }
+  }
+}

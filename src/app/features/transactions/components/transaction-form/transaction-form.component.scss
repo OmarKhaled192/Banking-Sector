@@ -13,7 +13,7 @@
 
 .input-wrapper {
   position: relative;
-  
+
   i {
     position: absolute;
     left: 1rem;
@@ -22,16 +22,23 @@
     color: var(--text-muted);
     z-index: 10;
   }
-  
-  input, ::ng-deep .p-inputnumber input, ::ng-deep .p-datepicker input {
+
+  input,
+  ::ng-deep .p-inputnumber input,
+  ::ng-deep .p-datepicker input {
     width: 100% !important;
     padding: 0.75rem 1rem 0.75rem 2.75rem !important;
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 12px !important;
-    color: white !important;
+    color: var(--text-main, #212529) !important;
     font-family: inherit !important;
-    
+
+    &::placeholder {
+      color: var(--text-muted, #6c757d) !important;
+      opacity: 1 !important;
+    }
+
     &:focus {
       border-color: rgba(99, 102, 241, 0.4) !important;
       outline: none;
@@ -40,17 +47,22 @@
 }
 
 ::ng-deep .custom-select {
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: var(--bg-secondary) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 12px !important;
-  color: white !important;
-  
+  color: var(--text-primary) !important;
+
   .p-select-label {
-    color: white !important;
+    color: var(--text-primary) !important;
     padding: 0.75rem 1rem !important;
   }
-  
+
   .p-select-trigger {
-    color: var(--text-muted) !important;
+    color: var(--text-primary) !important;
+    background: transparent !important;
+  }
+
+  .p-select-trigger-icon {
+    color: var(--text-primary) !important;
   }
 }

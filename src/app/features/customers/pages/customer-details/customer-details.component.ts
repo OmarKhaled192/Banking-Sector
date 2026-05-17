@@ -5,6 +5,7 @@ import { map, switchMap, tap } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { BackBtnComponent } from '../../../../shared/components';
 import { CustomerService } from '../../../../core/services/customer.service';
 import { AccountService } from '../../../../core/services/account.service';
 import { SEGMENT_SEVERITY, ACCOUNT_STATUS_SEVERITY } from '../../../../core/constants/app.constants';
@@ -12,7 +13,7 @@ import { SEGMENT_SEVERITY, ACCOUNT_STATUS_SEVERITY } from '../../../../core/cons
 @Component({
   selector: 'app-customer-details',
   standalone: true,
-  imports: [CommonModule, CardModule, ButtonModule, TagModule, RouterLink],
+  imports: [CommonModule, CardModule, ButtonModule, TagModule, RouterLink, BackBtnComponent],
   templateUrl: './customer-details.component.html',
   styleUrl: './customer-details.component.scss'
 })

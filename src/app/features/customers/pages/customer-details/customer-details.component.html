@@ -1,10 +1,7 @@
 <div class="page-container">
   @if (customer$ | async; as customer) {
   <div class="flex justify-content-between align-items-center mb-6">
-    <button class="back-btn" routerLink="/dashboard">
-      <i class="pi pi-arrow-left"></i>
-      <span>Customers</span>
-    </button>
+    <app-back-btn label="Customers" [route]="['/dashboard']"></app-back-btn>
     <span class="status-badge" [ngClass]="customer.segment">
       <i class="pi pi-star-fill mr-1"></i>
       {{ customer.segment }}

@@ -7,6 +7,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { CustomerService } from '../../../../core/services/customer.service';
+import { CustomerSegment } from '../../../../core/models/customer/customer.model';
+import { BadgeVariant, HeadingComponent, TextComponent, CardComponent, ButtonComponent, BadgeComponent } from '../../../../shared/components';
 import { SEGMENT_SEVERITY } from '../../../../core/constants/app.constants';
 
 @Component({
@@ -14,7 +16,8 @@ import { SEGMENT_SEVERITY } from '../../../../core/constants/app.constants';
   standalone: true,
   imports: [
     CommonModule, CardModule, TableModule,
-    InputTextModule, ButtonModule, TagModule
+    InputTextModule, ButtonModule, TagModule,
+    HeadingComponent, TextComponent, CardComponent, ButtonComponent, BadgeComponent
   ],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
@@ -26,11 +29,24 @@ export class CustomerListComponent {
   protected readonly customers$ = this.customerService.getAll();
   protected readonly segmentSeverity = SEGMENT_SEVERITY;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.customerService.clearSelection();
   }
 
   viewDetails(cif: string): void {
     this.router.navigate(['/dashboard/customer', cif]);
+  }
+
+  getSegmentVariant(segment: CustomerSegment): BadgeVariant {
+    switch (segment) {
+      case 'Retail':
+        return 'primary';
+      case 'Priority':
+        return 'warning';
+      case 'Business':
+        return 'success';
+      default:
+        return 'default';
+    }
   }
 }

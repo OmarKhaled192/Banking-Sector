@@ -3,16 +3,19 @@
   grid-template-columns: 1.2fr 1fr;
   min-height: 100vh;
   background-color: var(--bg-color);
-  
+
   @media (max-width: 991px) {
     grid-template-columns: 1fr;
-    .branding-section { display: none; }
+
+    .branding-section {
+      display: none;
+    }
   }
 }
 
 .branding-section {
   background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.05) 0%, transparent 40%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,8 +34,10 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 4rem;
-  
-  i { font-size: 2rem; }
+
+  i {
+    font-size: 2rem;
+  }
 }
 
 .badge-secure {
@@ -74,14 +79,14 @@
 .stats-row {
   display: flex;
   gap: 3rem;
-  
+
   .stat-val {
     display: block;
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
   }
-  
+
   .stat-label {
     color: var(--text-muted);
     font-size: 0.875rem;
@@ -130,7 +135,7 @@
 
 .input-wrapper {
   position: relative;
-  
+
   i {
     position: absolute;
     left: 1rem;
@@ -139,16 +144,21 @@
     color: var(--text-muted);
     z-index: 1;
   }
-  
-  input, ::ng-deep .p-password input {
+
+  .p-password {
+    width: 100%;
+  }
+
+  input,
+  ::ng-deep .p-password input {
     width: 100%;
     padding: 0.875rem 1rem 0.875rem 2.75rem !important;
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 12px !important;
-    color: white !important;
+    color: var(--text-primary) !important;
     transition: all 0.2s;
-    
+
     &:focus {
       border-color: rgba(250, 204, 21, 0.4) !important;
       background: rgba(250, 204, 21, 0.02) !important;
@@ -162,8 +172,10 @@
   font-size: 0.875rem;
   text-decoration: none;
   cursor: pointer;
-  
-  &:hover { text-decoration: underline; }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .submit-btn {
@@ -177,13 +189,13 @@
   cursor: pointer;
   margin-top: 1rem;
   transition: all 0.2s;
-  
+
   &:hover:not(:disabled) {
-    background: #eab308;
+    opacity: 0.5;
     transform: translateY(-1px);
     box-shadow: 0 4px 20px var(--primary-glow);
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -198,6 +210,8 @@
   font-size: 0.75rem;
   justify-content: center;
   align-items: flex-start;
-  
-  i { margin-top: 2px; }
+
+  i {
+    margin-top: 2px;
+  }
 }

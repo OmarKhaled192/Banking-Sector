@@ -1,0 +1,270 @@
+// Typography Component Styles - White Design System
+
+// Color Palette
+$text-primary: #212529;
+$text-secondary: #495057;
+$text-muted: #6c757d;
+$text-success: #28a745;
+$text-danger: #dc3545;
+$text-warning: #ffc107;
+$text-white: #ffffff;
+
+// Text Component Styles
+.app-text {
+  margin: 0;
+  transition: color 0.3s ease;
+
+  &--body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  &--caption {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  &--label {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  &--error {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: $text-danger;
+  }
+
+  &--hint {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: $text-muted;
+    font-style: italic;
+  }
+
+  // Color Variants
+  &--primary {
+    color: $text-primary;
+  }
+
+  &--secondary {
+    color: $text-secondary;
+  }
+
+  &--muted {
+    color: $text-muted;
+  }
+
+  &--success {
+    color: $text-success;
+    font-weight: 600;
+  }
+
+  &--danger {
+    color: $text-danger;
+    font-weight: 600;
+  }
+
+  &--warning {
+    color: $text-warning;
+    font-weight: 600;
+  }
+
+  // Truncate Variants
+  &--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Line Clamp Variants
+  &--line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &--line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &--line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &--line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Heading Component Styles
+.app-heading {
+  margin: 0;
+
+  &__title {
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transition: color 0.3s ease;
+    line-height: 1.2;
+  }
+
+  &__h1 {
+    font-size: 2.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__h2 {
+    font-size: 2rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__h3 {
+    font-size: 1.75rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__h4 {
+    font-size: 1.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.35rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.15rem;
+    }
+  }
+
+  &__h5 {
+    font-size: 1.25rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+
+  &__h6 {
+    font-size: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
+  }
+
+  // Color Variants
+  &--primary {
+    color: $text-primary;
+  }
+
+  &--secondary {
+    color: $text-secondary;
+  }
+
+  &--muted {
+    color: $text-muted;
+  }
+
+  &--success {
+    color: $text-success;
+  }
+
+  &--danger {
+    color: $text-danger;
+  }
+
+  &--warning {
+    color: $text-warning;
+  }
+
+  &__subtitle {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    color: $text-muted;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+}
+
+// Responsive Typography
+@media (max-width: 768px) {
+  .app-text {
+    &--body {
+      font-size: 0.9rem;
+    }
+
+    &--caption {
+      font-size: 0.75rem;
+    }
+
+    &--label {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// Accessibility - High Contrast Mode
+@media (prefers-contrast: more) {
+
+  .app-text,
+  .app-heading__title {
+    font-weight: 700;
+  }
+}
+
+// Print Styles
+@media print {
+
+  .app-text,
+  .app-heading {
+    color: #000 !important;
+  }
+}

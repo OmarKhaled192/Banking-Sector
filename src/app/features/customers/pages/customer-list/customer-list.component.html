@@ -1,81 +1,112 @@
 <div class="page-container">
-  <div class="flex justify-content-between align-items-center mb-6">
-    <div>
-      <h1 class="text-4xl font-heading m-0">Customer Management</h1>
-      <p class="text-muted mt-2">Select a customer to view their profile and accounts</p>
+  <div class="customer-header">
+    <div class="header-content">
+      <app-heading level="h1" color="primary" subtitle="Select a customer to view their profile and accounts">
+        Customer Management
+      </app-heading>
     </div>
     <div class="stats-badge-top">
       <i class="pi pi-users"></i>
       @if (customers$ | async; as customers) {
-        <span>{{ customers.length }} Customers</span>
+      <app-text variant="body" color="secondary">
+        {{ customers.length }} Customers
+      </app-text>
       }
     </div>
   </div>
 
-  <div class="glass-card p-0 overflow-hidden">
-    <p-table #dt [value]="(customers$ | async) || []" [paginator]="true" [rows]="10" 
-             [globalFilterFields]="['name','CIF','nationalId','email']" [rowHover]="true"
-             styleClass="p-datatable-custom">
-      
+  <app-card variant="elevated" padding="none" [hoverable]="false">
+    <p-table #dt [value]="(customers$ | async) || []" [paginator]="true" [rows]="10"
+      [globalFilterFields]="['name','CIF','nationalId','email']" [rowHover]="true" styleClass="p-datatable-custom"
+      responsiveLayout="scroll">
+
       <ng-template pTemplate="caption">
-        <div class="p-4 border-bottom-1 border-white-alpha-10">
-          <div class="input-wrapper max-w-20rem">
+        <div class="datatable-header">
+          <div class="search-input-wrapper">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search customers..." class="w-full" />
+            <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Search by name, CIF, ID, or email..." class="search-input" />
           </div>
         </div>
       </ng-template>
 
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="CIF">CIF <p-sortIcon field="CIF"></p-sortIcon></th>
-          <th pSortableColumn="name">CUSTOMER NAME <p-sortIcon field="name"></p-sortIcon></th>
-          <th pSortableColumn="nationalId">NATIONAL ID <p-sortIcon field="nationalId"></p-sortIcon></th>
-          <th pSortableColumn="segment">SEGMENT <p-sortIcon field="segment"></p-sortIcon></th>
-          <th pSortableColumn="email">EMAIL <p-sortIcon field="email"></p-sortIcon></th>
-          <th>PHONE</th>
-          <th class="text-center">ACTION</th>
+          <th pSortableColumn="CIF" class="column-cif">
+            CIF <p-sortIcon field="CIF"></p-sortIcon>
+          </th>
+          <th pSortableColumn="name" class="column-name">
+            Customer Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="nationalId" class="column-id">
+            National ID <p-sortIcon field="nationalId"></p-sortIcon>
+          </th>
+          <th pSortableColumn="segment" class="column-segment">
+            Segment <p-sortIcon field="segment"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email" class="column-email">
+            Email <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th class="column-phone">Phone</th>
+          <th class="column-action text-center">Action</th>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="body" let-customer>
         <tr>
-          <td><span class="text-muted font-mono">{{ customer.CIF }}</span></td>
-          <td>
-            <div class="flex align-items-center gap-3">
-              <div class="avatar-circle" [style.background]="customer.segment === 'Priority' ? 'var(--primary-color)' : 'var(--accent-color)'">
-                {{ customer.name.charAt(0) }}
+          <td class="column-cif">
+            <app-text variant="caption" color="muted">
+              {{ customer.CIF }}
+            </app-text>
+          </td>
+          <td class="column-name">
+            <div class="customer-info">
+              <div class="avatar-circle">
+                {{ customer.name.charAt(0).toUpperCase() }}
               </div>
-              <span class="font-bold">{{ customer.name }}</span>
+              <app-text variant="body" color="primary">{{ customer.name }}</app-text>
             </div>
           </td>
-          <td><span class="text-muted">{{ customer.nationalId }}</span></td>
-          <td>
-            <span class="status-badge" [ngClass]="customer.segment">
-              {{ customer.segment }}
-            </span>
+          <td class="column-id">
+            <app-text variant="caption" color="muted">
+              {{ customer.nationalId }}
+            </app-text>
           </td>
-          <td><span class="text-muted">{{ customer.email }}</span></td>
-          <td><span class="text-muted">{{ customer.phone }}</span></td>
-          <td class="text-center">
-            <button class="view-action-btn" (click)="viewDetails(customer.CIF)">
-              <i class="pi pi-eye"></i>
-              <span>View</span>
-            </button>
+          <td class="column-segment">
+            <app-badge [variant]="getSegmentVariant(customer.segment)" size="sm" [rounded]="true">
+              {{ customer.segment }}
+            </app-badge>
+          </td>
+          <td class="column-email">
+            <app-text variant="caption" color="secondary">
+              {{ customer.email }}
+            </app-text>
+          </td>
+          <td class="column-phone">
+            <app-text variant="caption" color="secondary">
+              {{ customer.phone }}
+            </app-text>
+          </td>
+          <td class="column-action text-center">
+            <app-button label="View" variant="outline" size="sm" icon="pi pi-eye" iconPosition="left"
+              (clicked)="viewDetails(customer.CIF)" [attr.aria-label]="'View details for ' + customer.name">
+            </app-button>
           </td>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="7">
-            <div class="flex flex-column align-items-center p-8 text-muted">
-              <i class="pi pi-search text-4xl mb-4"></i>
-              <p>No customers found matching your search.</p>
+          <td colspan="7" class="p-4">
+            <div class="empty-state">
+              <i class="pi pi-inbox"></i>
+              <app-text variant="body" color="muted">
+                No customers found matching your search.
+              </app-text>
             </div>
           </td>
         </tr>
       </ng-template>
     </p-table>
-  </div>
+  </app-card>
 </div>
